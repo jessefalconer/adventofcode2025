@@ -6,7 +6,7 @@ File.foreach("sample.txt").each do |command|
   vector = SIGNEDNESS[command[0]] * (command[1..].to_i % 100)
   scalar = SIGNEDNESS[command[0]] * command[1..].to_i
   counter += ((current_position + scalar) / 100).abs
-  counter -= 1 if current_position.zero? && scalar.negative?
+  counter -= 1 if current_position.zero?
   current_position = (current_position + vector) % 100
   counter += 1 if current_position.zero?
 end
