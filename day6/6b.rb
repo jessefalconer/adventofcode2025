@@ -9,15 +9,20 @@ def blank_column?(index)
 end
 
 total = 0
+will_be_blank = false
 minor_operator, minor_numbers = nil, []
 
 OPERATORS.each_with_index do |operator, index|
-  next if blank_column?(index)
+  if will_be_blank
+    will_be_blank = false
+    
+    next
+  end
   
   minor_operator ||= operator.to_sym
   minor_numbers << MATRIX.column(index).to_a.join.to_i
   
-  next unless blank_column?(index + 1)
+  next unless (will_be_blank = blank_column?(index + 1))
   
   total += minor_numbers.reduce(minor_operator)
   minor_operator, minor_numbers = nil, []
