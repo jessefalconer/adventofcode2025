@@ -5,7 +5,7 @@ OPERATORS = DATA.last.freeze
 MATRIX = Matrix[*DATA[0..-2]].freeze
 
 def blank_column?(index)
-  MATRIX.column(index).to_a.all? { _1 == " " }
+  (MATRIX.column(index) || []).all? { _1 == " " }
 end
 
 total = 0
